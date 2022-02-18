@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/cjsmith011/note-taker#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.3"
   }
 }

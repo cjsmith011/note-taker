@@ -21,12 +21,12 @@ function createNewNote(body, notesArray) {
     
     //our function's main code is here
     const note = body;
-    notesArray.push(animal);
+    notesArray.push(note);
     //this is the synchronous version of writeFile, use for small datasets only
     fs.writeFileSync(
-        //this is telling createNewAnimal where to put the data the user sent as a new animal - in our animals.json file
+        //this is telling createNewNote where to put the data the user sent as a note - in our db.json file
         //the join word is needed to take from the url dir and join it to the data file
-        path.join(__dirname, './Develop/db/db.json'),
+        path.join(__dirname, './note-taker/Develop/db/db.json'),
 
         //the null says to not change our existing data: add to it don't overwrite it and the 2 gives 2 lines of whitespace gap
         JSON.stringify({ notes: notesArray }, null, 2)
@@ -35,31 +35,25 @@ function createNewNote(body, notesArray) {
     return note;
 }
 
-function validateAnimal(animal) {
-    if (!animal.name || typeof animal.name !== 'string') {
+function validateNote(note) {
+    if (!note.title || typeof note.title !== 'string') {
         return false;
     }
-    if (!animal.species || typeof animal.species !== 'string') {
-        return false;
-    }
-    if (!animal.diet || typeof animal.diet !== 'string') {
-        return false;
-    }
-    if (!animal.personalityTraits || !Array.isArray(animal.personalityTraits)) {
+    if (!note.text || typeof note.text !== 'string') {
         return false;
     }
     return true;
 }
 
-app.get('/api/animals', (req, res) => {
-    let results = animals;
+app.get('/api/notes', (req, res) => {
+    let results = notes;
     if(req.query) {
         results = filterByQuery(req.query, results);
     }
     res.json(results);
 });
 
-app.get('/api/animals/:id', (req, res) => {
+app.get('/api/notes/:id', (req, res) => {
     const result = findById(req.params.id, animals);
     if (result) {
         res.json(result);
@@ -70,45 +64,43 @@ app.get('/api/animals/:id', (req, res) => {
 
 //this will route to our index
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, '../../public/index.html'));
 });
 
 //this will activate our animals page, just animals not api/animals since we are connecting to an html, not the data
-app.get('/animals', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/animals.html'));
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../public/notes.html'));
 });
 
 //this will activate our zookeepers page, just zookeeperss not api/zookeepers since we are connecting to an html, not the data
-app.get('/zookeepers', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
-});
+// app.get('/zookeepers', (req, res) => {
+//     res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+// });
 
 //this will route to the homepage if a user selects an option without a route, wildcard option with the *, should always be the last GET
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '.public/index.html'));
+    res.sendFile(path.join(__dirname, '../../public/index.html'));
 });
 
-app.post('/api/animals', (req, res) => {
+app.post('/api/notes', (req, res) => {
     //req.body is where our incoming content will be
     //set id based on what the next index of the array will be when user adds an animal
-    req.body.id = animals.length.toString();
+    req.body.id = notes.length.toString();
 
     //validation of user added animals- if any data is missing, send a 400 error back to the user
     if (!validateAnimal(req.body)) {
-        res.status(400).send('Please send your animal data in the proper format');
+        res.status(400).send('Please give your note a Title and content!');
     } else {
     //add animal to the animals.json file and array 
-    const animal = createNewAnimal(req.body, animals);
+    const note = createNewNote(req.body, notes);
 
-    res.json(animal);
+    res.json(note);
     }
 });
 
 
 
 
-
-
-app.listen(3001, () => {
-    console.log(`Got to your browser for the page at localhost:3001!`);
+app.listen(PORT, () => {
+    console.log(`Go to your browser for the page at localhost:3001!`);
   });
