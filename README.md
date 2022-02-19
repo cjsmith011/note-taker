@@ -1,4 +1,11 @@
 # note-taker
+
+Welcome to my Note Taker app!
+
+This was a very difficult assignment and I learned a lot doing it.  
+-Using Insomnia was crucial to what I was able to deploy - I had several disconnects in my pages due to how my folders were setup and using Insomnia helped me find those disconnects.
+
+
 GIVEN a note-taking application
 WHEN I open the Note Taker
 THEN I am presented with a landing page with a link to a notes page

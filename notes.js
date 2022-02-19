@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 //this middleware will connect our index pages to the css and js styling pages
-app.use(express.static('public'));
+app.use(express.static('note-taker/public'));
 //parse the incoming user data into something that our app understands
 app.use(express.urlencoded({ extended: true }));
 //parse the incoming JSON data
@@ -45,31 +45,31 @@ function validateNote(note) {
     return true;
 }
 
-app.get('/api/notes', (req, res) => {
-    let results = notes;
-    if(req.query) {
-        results = filterByQuery(req.query, results);
-    }
-    res.json(results);
-});
+// app.get('/api/notes', (req, res) => {
+//     let results = notes;
+//     if(req.query) {
+//         results = filterByQuery(req.query, results);
+//     }
+//     res.json(results);
+// });
 
-app.get('/api/notes/:id', (req, res) => {
-    const result = findById(req.params.id, animals);
-    if (result) {
-        res.json(result);
-    } else {
-    res.send(404);
-    }
-});
+// app.get('/api/notes/:id', (req, res) => {
+//     const result = findById(req.params.id, animals);
+//     if (result) {
+//         res.json(result);
+//     } else {
+//     res.send(404);
+//     }
+// });
 
 //this will route to our index
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/index.html'));
+    res.sendFile(path.join(__dirname, 'Develop/public/index.html'));
 });
 
 //this will activate our animals page, just animals not api/animals since we are connecting to an html, not the data
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/notes.html'));
+    res.sendFile(path.join(__dirname, 'Develop/public/notes.html'));
 });
 
 //this will activate our zookeepers page, just zookeeperss not api/zookeepers since we are connecting to an html, not the data
@@ -79,7 +79,7 @@ app.get('/notes', (req, res) => {
 
 //this will route to the homepage if a user selects an option without a route, wildcard option with the *, should always be the last GET
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/index.html'));
+    res.sendFile(path.join(__dirname, 'Develop/public/index.html'));
 });
 
 app.post('/api/notes', (req, res) => {
@@ -88,7 +88,7 @@ app.post('/api/notes', (req, res) => {
     req.body.id = notes.length.toString();
 
     //validation of user added animals- if any data is missing, send a 400 error back to the user
-    if (!validateAnimal(req.body)) {
+    if (!validateNote(req.body)) {
         res.status(400).send('Please give your note a Title and content!');
     } else {
     //add animal to the animals.json file and array 
@@ -97,6 +97,11 @@ app.post('/api/notes', (req, res) => {
     res.json(note);
     }
 });
+
+module.exports = {
+    createNewNote,
+    validateNote
+};
 
 
 
