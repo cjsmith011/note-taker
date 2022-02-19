@@ -5,6 +5,10 @@ Welcome to my Note Taker app!
 This was a very difficult assignment and I learned a lot doing it.  
 -Using Insomnia was crucial to what I was able to deploy - I had several disconnects in my pages due to how my folders were setup and using Insomnia helped me find those disconnects.
 
+-I used Heroku to deploy the app and that was challenging since I didn't get to use it during the async class due to download issues.
+
+
+
 
 GIVEN a note-taking application
 WHEN I open the Note Taker
