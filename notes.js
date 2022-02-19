@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 //this middleware will connect our index pages to the css and js styling pages
-app.use(express.static('note-taker/public'));
+app.use(express.static('note-taker/Develop/public'));
 //parse the incoming user data into something that our app understands
 app.use(express.urlencoded({ extended: true }));
 //parse the incoming JSON data
@@ -26,7 +26,7 @@ function createNewNote(body, notesArray) {
     fs.writeFileSync(
         //this is telling createNewNote where to put the data the user sent as a note - in our db.json file
         //the join word is needed to take from the url dir and join it to the data file
-        path.join(__dirname, './note-taker/Develop/db/db.json'),
+        path.join(__dirname, './Develop/db/db.json'),
 
         //the null says to not change our existing data: add to it don't overwrite it and the 2 gives 2 lines of whitespace gap
         JSON.stringify({ notes: notesArray }, null, 2)
@@ -72,10 +72,6 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'Develop/public/notes.html'));
 });
 
-//this will activate our zookeepers page, just zookeeperss not api/zookeepers since we are connecting to an html, not the data
-// app.get('/zookeepers', (req, res) => {
-//     res.sendFile(path.join(__dirname, './public/zookeepers.html'));
-// });
 
 //this will route to the homepage if a user selects an option without a route, wildcard option with the *, should always be the last GET
 app.get('*', (req, res) => {
@@ -87,11 +83,11 @@ app.post('/api/notes', (req, res) => {
     //set id based on what the next index of the array will be when user adds an animal
     req.body.id = notes.length.toString();
 
-    //validation of user added animals- if any data is missing, send a 400 error back to the user
+    //validation of user added notes- if any data is missing, send a 400 error back to the user
     if (!validateNote(req.body)) {
         res.status(400).send('Please give your note a Title and content!');
     } else {
-    //add animal to the animals.json file and array 
+    //add note to the db.json file and array 
     const note = createNewNote(req.body, notes);
 
     res.json(note);
