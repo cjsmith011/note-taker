@@ -45,32 +45,16 @@ function validateNote(note) {
     return true;
 }
 
-// app.get('/api/notes', (req, res) => {
-//     let results = notes;
-//     if(req.query) {
-//         results = filterByQuery(req.query, results);
-//     }
-//     res.json(results);
-// });
-
-// app.get('/api/notes/:id', (req, res) => {
-//     const result = findById(req.params.id, animals);
-//     if (result) {
-//         res.json(result);
-//     } else {
-//     res.send(404);
-//     }
-// });
 
 //this will route to our index
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'Develop/public/index.html'));
-});
+  });
 
-//this will activate our animals page, just animals not api/animals since we are connecting to an html, not the data
+//this will activate our notes page
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'Develop/public/notes.html'));
-});
+ });
 
 
 //this will route to the homepage if a user selects an option without a route, wildcard option with the *, should always be the last GET
