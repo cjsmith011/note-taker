@@ -1,0 +1,24 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "GIVEN a note-taking application\r WHEN I open the Note Taker\r THEN I am presented with a landing page with a link to a notes page\r WHEN I click on the link to the notes page\r THEN I am presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column\r WHEN I enter a new note title and the note’s text\r THEN a Save icon appears in the navigation at the top of the page\r WHEN I click on the Save icon\r THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes\r WHEN I click on an existing note in the list in the left-hand column\r THEN that note appears in the right-hand column\r WHEN I click on the Write icon in the navigation at the top of the page\r THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column",
+  "main": "notes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node notes.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjsmith011/note-taker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cjsmith011/note-taker/issues"
+  },
+  "homepage": "https://github.com/cjsmith011/note-taker#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
