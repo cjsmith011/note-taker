@@ -18,4 +18,3 @@ deployed site: https://cjsmith011.github.io/note-taker/
 
 Heroku deployment: https://polar-fjord-85204.herokuapp.com/
 
-

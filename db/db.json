@@ -1,24 +1,18 @@
-
-[
+{
+  "notes": [
     {
-      "id": "0",
       "title": "Test Title",
       "text": "Test text"
     },
     {
-      "id": "1",
-      "title": "Number 2 note",
-      "text": "Number2 text info"
+      "title": "Second note",
+      "text": "coming in from Insomnia in the post to api/notes",
+      "id": "1"
     },
     {
-      "id": "2",
-      "title": "Checker note",
-      "text": "checker text"
-     
-    },
-    {
-      "id": "3",
-      "title": "Checker note",
-      "text": "checker text"
+      "title": "Third note",
+      "text": "this one is coming in to demo the delete feature",
+      "id": "2"
     }
   ]
+}
